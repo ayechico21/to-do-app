@@ -7,15 +7,13 @@ import NewTask from "./components/NewTask";
 import TasksInfo from "./components/TaskInfo";
 
 function App() {
-  const tasks = [...useSelector((state) => state.tasks)].sort((a, b) => {
-    return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1;
-  });
+  const tasks = [...useSelector((state) => state.tasks)];
 
   return (
     <div className="App">
       <Title />
       <NewTask />
-      <TasksInfo />
+      <TasksInfo tasks={tasks} />
       <TaskList tasks={tasks} />
     </div>
   );
