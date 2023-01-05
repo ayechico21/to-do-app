@@ -12,6 +12,7 @@ export function addTask(task) {
 const defaultTasks = [
   {
     name: "task1",
+    isDone: false,
   },
 ];
 
@@ -22,6 +23,7 @@ function tasks(state = defaultTasks, action) {
         ...state,
         {
           name: action.task,
+          isDone: false,
         },
       ];
 
