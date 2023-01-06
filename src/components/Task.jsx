@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteTask, editTask, taskDone } from "../store/tasks";
-
+import { TaskButton, TaskWrapper } from "./Task.styled";
 const Task = ({ task }) => {
   const [editStatus, setEditStatus] = useState(false);
   const [taskName, setTaskName] = useState(task.name);
@@ -49,23 +49,32 @@ const Task = ({ task }) => {
   };
 
   return (
-    <>
-      <h3>
-        <div onClick={handleEditingStatus} style={viewMode}>
-          {task.name}
-        </div>
-        <input
-          type="text"
-          onChange={handleOnChange}
-          onKeyDown={handleEdit}
-          value={taskName}
-          style={editMode}
-        ></input>
-      </h3>
-      <p>{task.isDone ? "Completed" : "Active"}</p>
-      <button onClick={handleOnDone}>Done</button>
-      <button onClick={handleOnDelete}>Delete</button>
-    </>
+    <TaskWrapper done={task.isDone}>
+      <div>
+        {!editStatus && (
+          <div onClick={handleEditingStatus} style={viewMode}>
+            {task.name}
+          </div>
+        )}
+        {editStatus && (
+          <input
+            type="text"
+            onChange={handleOnChange}
+            onKeyDown={handleEdit}
+            value={taskName}
+            style={editMode}
+          ></input>
+        )}
+      </div>
+      <TaskButton>
+        <button onClick={handleOnDone} className="done">
+          ✓
+        </button>
+        <button onClick={handleOnDelete} className="delete">
+          ✗
+        </button>
+      </TaskButton>
+    </TaskWrapper>
   );
 };
 
