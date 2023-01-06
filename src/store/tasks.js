@@ -4,6 +4,7 @@ const ADD_TASK = "ADD_TASK";
 const TASK_DONE = "TASK_DONE";
 const DELETE_TASK = "DELETE_TASK";
 const FILTER_TASK = "FILTER_TASK";
+const EDIT_TASK = "EDIT_TASK";
 
 const defaultTasks = [
   {
@@ -42,9 +43,17 @@ export function filterTask(task, filter) {
   };
 }
 
+export function editTask(task, edit) {
+  return {
+    type: EDIT_TASK,
+    edit,
+    task,
+  };
+}
+
 /*********************************REDUCER************************ */
 function tasks(state = defaultTasks, action) {
-  let task, tasks;
+  let task, tasks, index;
   switch (action.type) {
     case ADD_TASK:
       return [
@@ -56,17 +65,12 @@ function tasks(state = defaultTasks, action) {
       ];
 
     case TASK_DONE:
-      console.log(action);
-      task = state.find((t) => action.task.name === t.name); // Get task to be toggled
-      tasks = state.filter((t) => action.task.name !== t.name); // All other tasks
-
-      return [
-        ...tasks,
-        {
-          name: task.name,
-          isDone: !task.isDone, // Toggling task completion status
-        },
-      ];
+      index = state.indexOf(action.task); // Get index of task to be toggle
+      state[index] = {
+        name: action.task.name,
+        isDone: !action.task.isDone, // Toggling task completion status
+      };
+      return [...state];
 
     case DELETE_TASK:
       task = state.find((t) => action.task.name === t.name); // Get task to be deleted
@@ -99,10 +103,19 @@ function tasks(state = defaultTasks, action) {
         });
       } else {
         tasks = state.sort((task1, task2) => {
-          return task1.name.toLowerCase() > task2.name.toLowerCase() ? 1 : -1;
+          return task1.name.toLowerCase() > task2.name.toLowerCase() ? 1 : -1; // sort alphabetically
         });
       }
       return [...tasks];
+
+    case EDIT_TASK:
+      index = state.indexOf(action.task); // Get index task to be edited
+      state[index] = {
+        name: action.edit, // edit the name of task
+        isDone: false,
+      };
+
+      return [...state];
 
     default:
       return state;
