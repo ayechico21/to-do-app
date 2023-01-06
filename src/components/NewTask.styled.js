@@ -29,8 +29,6 @@ export const ButtonWrapper = styled.div`
 
     padding: 10px 30px;
     font-size: 1.05em;
-    border: none;
-    outline: none;
 
     border-radius: 12px;
     &:hover {

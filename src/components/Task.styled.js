@@ -24,6 +24,7 @@ export const TaskButton = styled.div`
     width: 70px;
     font-size: 1.2em;
     border: none;
+    cursor: pointer;
   }
   .done {
     color: green;
@@ -38,5 +39,21 @@ export const TaskButton = styled.div`
 
   .delete:hover {
     border: 2px solid red;
+  }
+`;
+
+export const TaskName = styled.div`
+  cursor: pointer;
+  input {
+    text-align: center;
+    font-family: "Merriweather", serif;
+    flex-basis: 80px;
+
+    padding: 3px 5px;
+    border: 2px solid grey;
+    box-shadow: 0px 0px 10px 0px rgba(219, 219, 219, 0.5);
+    font-size: 1.05em;
+    border-radius: 12px;
+    color: Black;
   }
 `;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteTask, editTask, taskDone } from "../store/tasks";
-import { TaskButton, TaskWrapper } from "./Task.styled";
+import { TaskButton, TaskName, TaskWrapper } from "./Task.styled";
 const Task = ({ task }) => {
   const [editStatus, setEditStatus] = useState(false);
   const [taskName, setTaskName] = useState(task.name);
@@ -50,7 +50,7 @@ const Task = ({ task }) => {
 
   return (
     <TaskWrapper done={task.isDone}>
-      <div>
+      <TaskName>
         {!editStatus && (
           <div onClick={handleEditingStatus} style={viewMode}>
             {task.name}
@@ -65,7 +65,7 @@ const Task = ({ task }) => {
             style={editMode}
           ></input>
         )}
-      </div>
+      </TaskName>
       <TaskButton>
         <button onClick={handleOnDone} className="done">
           ✓

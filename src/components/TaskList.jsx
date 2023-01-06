@@ -4,7 +4,7 @@ import Task from "./Task";
 const TaskList = ({ tasks }) => {
   return (
     <>
-      <ul>
+      <ul style={{ listStyle: "none" }}>
         {tasks.map((task) => (
           <li key={task.name}>
             <Task task={task} />

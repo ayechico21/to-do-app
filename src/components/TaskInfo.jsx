@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { filterTask } from "../store/tasks";
-import { TaskInfoWrapper } from "./TaskInfo.styled";
+import { TaskInfoWrapper, RadioInputsWrapper } from "./TaskInfo.styled";
+
 const TasksInfo = ({ tasks }) => {
   const [filter, setFilter] = useState("active");
   const dispatch = useDispatch();
 
-  const handleFilterChange = (event) => {
+  const onRadioChange = (event) => {
+    console.log(event.target.value);
     setFilter(event.target.value);
   };
   const handleFilter = () => {
@@ -14,16 +16,40 @@ const TasksInfo = ({ tasks }) => {
   };
   return (
     <TaskInfoWrapper>
-      <div>Active</div>
-      <div>Completed</div>
-      <div>
-        <select value={filter} onChange={handleFilterChange}>
-          <option value="active">Active</option>
-          <option value="completed">Completed</option>
-          <option value="all">ALL</option>
-        </select>
-        <button onClick={handleFilter}>Filter</button>
-      </div>
+      <RadioInputsWrapper>
+        <div>
+          <input
+            type="radio"
+            id="active"
+            name="filter"
+            value="active"
+            defaultChecked
+            onChange={onRadioChange}
+          />
+          <label htmlFor="active">Active</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            id="completed"
+            name="filter"
+            value="completed"
+            onChange={onRadioChange}
+          />
+          <label htmlFor="completed">Completed</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            id="all"
+            name="filter"
+            value="all"
+            onChange={onRadioChange}
+          />
+          <label htmlFor="all">All</label>
+        </div>
+      </RadioInputsWrapper>
+      <button onClick={handleFilter}>Filter</button>
     </TaskInfoWrapper>
   );
 };
