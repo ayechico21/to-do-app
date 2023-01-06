@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask } from "../store/tasks";
+import { ButtonWrapper, TaskInput, TaskWrapper } from "./NewTask.styled";
 
 const NewTask = () => {
   const [taskName, setTaskName] = useState("");
@@ -16,22 +17,27 @@ const NewTask = () => {
     setTaskName("");
   };
 
+  const handleClear = () => {
+    setTaskName("");
+  };
+
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <input
-            type="text"
-            onChange={handleOnChange}
-            value={taskName}
-            placeholder="Enter task name"
-          />
-        </label>
-        <div>
-          <button type="submit">Add</button>
-        </div>
-      </form>
-    </>
+    <TaskWrapper>
+      <TaskInput
+        type="text"
+        onChange={handleOnChange}
+        value={taskName}
+        placeholder="Enter task name"
+      />
+      <ButtonWrapper>
+        <button type="submit" onClick={handleSubmit}>
+          Add
+        </button>
+        <button onClick={handleClear} className="clear">
+          clear
+        </button>
+      </ButtonWrapper>
+    </TaskWrapper>
   );
 };
 

@@ -16,3 +16,8 @@ html {
   padding: 2rem;
   text-align: center;
 }
+
+body {
+  background: linear-gradient(to top, #2c3e50, #bdc3c7);
+  background-attachment: fixed;
+}
